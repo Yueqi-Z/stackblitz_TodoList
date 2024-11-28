@@ -1,0 +1,577 @@
+/* calendar.css - v1.2 */
+
+/* ===================================
+ * Calendar Layout & Core Styles
+ * =================================== */
+
+/* Calendar Container & Controls */
+.calendar-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-md) 0;
+}
+
+.calendar-navigation {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+/* Month Display */
+.current-month {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  min-width: 200px;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+/* Navigation Buttons */
+.calendar-navigation .btn-icon {
+  width: 32px;
+  height: 32px;
+  padding: var(--spacing-xs);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--background-light);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.calendar-navigation .btn-icon:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+#todayBtn {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-weight: 500;
+}
+
+/* Calendar Grid Structure */
+.calendar-grid {
+  background-color: var(--background-dark);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Calendar Header (Days of Week) */
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background-color: var(--background-light);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.calendar-header span {
+  padding: var(--spacing-md);
+  text-align: center;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+/* Calendar Body */
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background-color: var(--border-color);
+  min-height: 600px; /* Ensure consistent calendar height */
+}
+
+/* Calendar Day Cell Base Styles */
+.calendar-day {
+  background-color: var(--background-dark);
+  min-height: 120px;
+  padding: var(--spacing-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+/* Day States */
+.calendar-day.other-month {
+  background-color: var(--background-light);
+  color: var(--text-secondary);
+}
+
+.calendar-day.today {
+  background-color: rgba(37, 99, 235, 0.05);
+}
+
+.calendar-day.has-tasks {
+  cursor: pointer;
+}
+
+.calendar-day:hover:not(.other-month) {
+  background-color: rgba(37, 99, 235, 0.05);
+}
+
+/* Day Number Display */
+.day-number {
+  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.today .day-number {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.today .day-number::after {
+  content: 'Today';
+  font-size: 0.75rem;
+  color: var(--primary-color);
+  font-weight: normal;
+  background-color: rgba(37, 99, 235, 0.1);
+  padding: 2px 6px;
+  border-radius: var(--border-radius-sm);
+}
+
+/* Task Container Within Day Cell */
+.task-container {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+/* ===================================
+ * Task Preview Styles
+ * =================================== */
+
+/* Task Preview Cards */
+.task-preview {
+  font-size: 0.813rem;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  background-color: white;
+  border-left: 3px solid;
+  margin-bottom: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.task-preview:hover {
+  transform: translateX(2px);
+  background-color: var(--background-light);
+}
+
+/* Priority-based Styling */
+.task-preview.high {
+  border-left-color: var(--danger-color);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.task-preview.medium {
+  border-left-color: var(--warning-color);
+  background-color: rgba(234, 179, 8, 0.1);
+}
+
+.task-preview.low {
+  border-left-color: var(--success-color);
+  background-color: rgba(34, 197, 94, 0.1);
+}
+
+/* Completed Task Style */
+.task-preview.completed {
+  opacity: 0.7;
+  text-decoration: line-through;
+  background-color: var(--background-light);
+}
+
+/* Task Time Display */
+.task-preview .task-time {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-right: var(--spacing-xs);
+}
+
+/* More Tasks Indicator */
+.more-tasks {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: var(--spacing-xs);
+  background-color: var(--background-light);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  margin-top: auto;
+  transition: all 0.2s ease;
+}
+
+.more-tasks:hover {
+  background-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Task Preview Animation */
+@keyframes taskPreviewIn {
+  from {
+      opacity: 0;
+      transform: translateY(-4px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+.task-preview {
+  animation: taskPreviewIn 0.2s ease-out;
+}
+
+/* ===================================
+* Modal Styles
+* =================================== */
+
+/* Task Preview Modal */
+.task-preview-content {
+  padding: var(--spacing-lg) var(--spacing-xl);
+}
+
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.preview-priority {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.preview-priority.high {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--danger-color);
+}
+
+.preview-priority.medium {
+  background-color: rgba(234, 179, 8, 0.1);
+  color: var(--warning-color);
+}
+
+.preview-priority.low {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: var(--success-color);
+}
+
+.preview-date {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.preview-body {
+  margin-bottom: var(--spacing-xl);
+}
+
+.preview-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.preview-description {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.preview-footer {
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+}
+
+.preview-status {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: var(--background-light);
+  color: var(--text-secondary);
+}
+
+/* Modal Actions */
+.modal-actions {
+  display: flex;
+  justify-content: center;  /* Center the button */
+  padding: var(--spacing-xl);  /* Increased padding */
+  margin-top: var(--spacing-md);  /* Add some space from content above */
+  border-top: 1px solid var(--border-color);
+  background-color: var(--background-light);
+}
+
+/* Update the existing more-tasks styles */
+.more-tasks {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: var(--spacing-sm);  /* Increased padding */
+  background-color: var(--background-light);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  margin-top: auto;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);  /* Added subtle border */
+  font-weight: 500;  /* Made text slightly bolder */
+}
+
+.more-tasks:hover {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* ===================================
+ * Day Preview Modal Styles
+ * =================================== */
+
+/* Day Preview Content */
+.day-preview-content {
+  padding: 0 var(--spacing-xl);
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* Custom Scrollbar for Day Preview */
+.day-preview-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.day-preview-content::-webkit-scrollbar-track {
+  background: var(--background-light);
+  border-radius: 4px;
+}
+
+.day-preview-content::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+.day-preview-content::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Day Tasks List */
+.day-tasks-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) 0;
+}
+
+/* Day Task Item */
+.day-task-item {
+  background-color: var(--background-dark);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.day-task-item:hover {
+  transform: translateX(4px);
+  border-color: var(--primary-color);
+}
+
+.day-task-item.completed {
+  opacity: 0.7;
+}
+
+.day-task-item.completed .day-task-title {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+/* Day Task Content */
+.day-task-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.day-task-title {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.day-task-time {
+  font-size: 0.813rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* Empty Day Message */
+.empty-day-message {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--text-secondary);
+}
+
+/* ===================================
+* Animation & Transitions
+* =================================== */
+
+/* Calendar Day Hover Animation */
+@keyframes dayHighlight {
+  0% {
+      background-color: var(--background-dark);
+  }
+  100% {
+      background-color: rgba(37, 99, 235, 0.05);
+  }
+}
+
+.calendar-day:not(.other-month):hover {
+  animation: dayHighlight 0.3s ease forwards;
+}
+
+/* Task Count Badge Animation */
+@keyframes badgePulse {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.1);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+.task-count-badge {
+  animation: badgePulse 1s ease-in-out;
+}
+
+/* ===================================
+* Responsive Design
+* =================================== */
+
+/* Tablet Breakpoint */
+@media (max-width: 1024px) {
+  .calendar-controls {
+      padding: var(--spacing-sm);
+  }
+
+  .current-month {
+      font-size: 1.1rem;
+      min-width: 160px;
+  }
+
+  .calendar-day {
+      min-height: 100px;
+  }
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 768px) {
+  /* Calendar Controls */
+  .calendar-controls {
+      flex-direction: column;
+      gap: var(--spacing-md);
+  }
+
+  /* Calendar Header */
+  .calendar-header span {
+      font-size: 0.75rem;
+      padding: var(--spacing-sm);
+  }
+
+  /* Calendar Days */
+  .calendar-day {
+      min-height: 80px;
+      padding: var(--spacing-xs);
+  }
+
+  .day-number {
+      font-size: 0.813rem;
+  }
+
+  /* Task Preview */
+  .task-preview {
+      font-size: 0.75rem;
+      padding: 4px var(--spacing-xs);
+  }
+
+  .more-tasks {
+      font-size: 0.688rem;
+  }
+
+  /* Today Label */
+  .today .day-number::after {
+      display: none;
+  }
+
+  /* Modal Adjustments */
+  .modal-content {
+      width: 95%;
+      margin: var(--spacing-sm);
+  }
+
+  .day-preview-content {
+      padding: 0 var(--spacing-md);
+  }
+}
+
+/* Small Mobile Breakpoint */
+@media (max-width: 480px) {
+  .calendar-header span {
+      font-size: 0.688rem;
+      padding: var(--spacing-xs);
+  }
+
+  .calendar-day {
+      min-height: 60px;
+  }
+
+  .task-preview {
+      font-size: 0.688rem;
+  }
+
+  .more-tasks {
+      display: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .calendar-controls,
+  .modal {
+      display: none !important;
+  }
+
+  .calendar-grid {
+      border: none;
+      box-shadow: none;
+  }
+
+  .calendar-day {
+      border: 1px solid var(--border-color) !important;
+      min-height: 150px;
+  }
+}

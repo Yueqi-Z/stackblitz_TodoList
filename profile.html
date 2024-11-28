@@ -1,0 +1,117 @@
+<!-- profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskMaster Pro - Profile</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+    <header class="global-header">
+        <div class="header-content">
+            <h1 class="logo">TaskMaster Pro</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Tasks</a></li>
+                    <li><a href="calendar.html">Calendar</a></li>
+                    <li><a href="profile.html" class="active">Profile</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu">
+                <span class="user-name">John Doe</span>
+                <button class="logout-btn">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="profile-section">
+            <h2>User Profile</h2>
+            <div class="profile-info">
+            <div class="profile-field">
+            <label>Display Name</label>
+            <span>John Doe</span>
+            <button class="btn btn-edit btn-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                </svg>
+                Edit
+            </button>
+        </div>
+                <div class="profile-field">
+                    <label>Email</label>
+                    <span>john.doe@example.com</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats-section">
+            <h2>Task Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Tasks</h3>
+                    <span class="stat-number">45</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending Tasks</h3>
+                    <span class="stat-number">12</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Completed Tasks</h3>
+                    <span class="stat-number">33</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Due This Week</h3>
+                    <span class="stat-number">8</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="settings-section">
+            <h2>Settings</h2>
+            <div class="settings-options">
+                <div class="setting-item">
+                    <label for="theme">Theme</label>
+                    <select id="theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>
+                <div class="setting-item">
+                    <button class="change-password-btn">Change Password</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="passwordModal" hidden>
+        <div class="modal-content">
+            <h2>Change Password</h2>
+            <form id="passwordForm">
+                <div class="form-group">
+                    <label for="currentPassword">Current Password</label>
+                    <input type="password" id="currentPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <input type="password" id="newPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm New Password</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit">Update Password</button>
+                    <button type="button" class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/profile.js"></script>
+</body>
+</html>
